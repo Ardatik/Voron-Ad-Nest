@@ -16,11 +16,12 @@ BD_NAME = os.getenv("BD_NAME")
 
 print(BD_USER, BD_PASSWORD, BD_HOST, BD_PORT, BD_NAME)
 
-SQLALCHEMY_DATABASE_URL = f"postgresql+psycopg://{BD_USER}:{BD_PASSWORD}@{BD_HOST}:{BD_PORT}/{BD_NAME}"
+SQLALCHEMY_DATABASE_URL = (
+    f"postgresql+psycopg://{BD_USER}:{BD_PASSWORD}@{BD_HOST}:{BD_PORT}/{BD_NAME}"
+)
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
-SessionLocal = sessionmaker(autocommit = False, autoflush=False, bind = engine)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-Base.metadata.create_all(bind = engine)
-    
+Base.metadata.create_all(bind=engine)
