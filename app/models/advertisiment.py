@@ -3,20 +3,20 @@ from sqlalchemy import String, Boolean, Uuid, Float, DateTime, ForeignKey, func
 import uuid
 from .base import Base
 from datetime import datetime
-import enum
+from enum import Enum
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .account import User
 
 
-class Category(enum.Enum):
+class Category(Enum):
     service = "service"
     product = "product"
     company = "company"
 
 
-class Platforms(enum.Enum):
+class Platforms(Enum):
     yandex = "yandex"
     avito = "avito"
 
