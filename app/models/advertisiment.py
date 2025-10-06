@@ -25,7 +25,7 @@ class Advertisement(Base):
     __tablename__ = "advertisement"
 
     adv_id: Mapped[uuid.UUID] = mapped_column(
-        Uuid, primary_key=True, default=uuid.uuid4
+        Uuid, primary_key=True, default=uuid.uuid4, index=True
     )
     user_id: Mapped[uuid.UUID] = mapped_column(
         Uuid, ForeignKey("users.id"), nullable=False
@@ -37,6 +37,7 @@ class Advertisement(Base):
     )
     type_service: Mapped[Category]
     platforms: Mapped[Platforms]
+    adv_text: Mapped[str] = mapped_column(String, nullable=False)
     status_paid: Mapped[bool] = mapped_column(Boolean, server_default="true")
     price: Mapped[float] = mapped_column(Float, nullable=False)
     date_create_adv: Mapped[datetime] = mapped_column(
