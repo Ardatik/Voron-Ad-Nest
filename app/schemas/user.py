@@ -80,6 +80,8 @@ class ChangeAccountData(BaseModel):
     @field_validator("phone_number")
     @classmethod
     def validate_phone_number(cls, phone: str) -> str:
+        if phone is None:
+            return phone
         pattern = r"^\+?[1-9][0-9]{7,14}$"
         if not re.match(pattern, phone):
             raise ValueError("Неверный формат номера телефона")
@@ -88,6 +90,8 @@ class ChangeAccountData(BaseModel):
     @field_validator("date_of_birth")
     @classmethod
     def validate_date_of_birth(cls, birth_date: date) -> date:
+        if birth_date is None:
+            return birth_date
         if birth_date > date.today():
             raise ValueError("Неверно указана дата рождения")
         if (date.today() - birth_date).days / 365 < 14:
@@ -109,3 +113,12 @@ class UserResponse(BaseModel):
     patronymic_name: Optional[str]
     date_of_birth: date
     is_active: bool
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    id: str | None = None
